@@ -9,3 +9,9 @@ Blinking red and yellow led with switching modes. The requirement is for the bli
 | v1 | v2 |
 | --- | --- |
 | ![v1 board](v1/docs/board.jpg) | to be added |
+
+## Demo v1
+
+https://github.com/user-attachments/assets/73a8884c-38be-4584-a128-11735eddf403
+
+
