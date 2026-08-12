@@ -1,0 +1,1 @@
+This folder records my journey of learning embedded development.
