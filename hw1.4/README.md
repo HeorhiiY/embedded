@@ -6,4 +6,6 @@ Blinking red and yellow led with switching modes. The requirement is for the bli
 
 ## Photos
 
-![v1 board](v1/docs/board.jpg)
+| v1 | v2 |
+| --- | --- |
+| ![v1 board](v1/docs/board.jpg) | to be added |
