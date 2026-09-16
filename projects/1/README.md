@@ -14,3 +14,6 @@ Notes:
 * the green diode on the relay is not working (the indicator of switching)
 
 ## Demo
+
+https://github.com/user-attachments/assets/026c4b06-9d8b-4b44-b3ce-fe1d2a8c781b
+
