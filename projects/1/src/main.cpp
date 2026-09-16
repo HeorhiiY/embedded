@@ -8,13 +8,19 @@ const int ADC_PIN = 7;
 // day values
 const int FLOOR = 2500;
 const int CEILING = 3000;
-float volts = 0.0;
+// base voltage applied to the transistor when switching on — tune this
+float volts = 3.2;
+
+void setVolts(float v) {
+  int duty = (v / 3.3) * 255;   // 3.3 V = full scale
+  analogWrite(PIN, duty);
+}
 
 void setup() {
   Serial.begin(115200);
   pinMode(PIN, OUTPUT);
   pinMode(ADC_PIN, INPUT);
-  digitalWrite(PIN, LOW);
+  setVolts(0.0);
 }
 
 void loop() {
@@ -22,10 +28,10 @@ void loop() {
   Serial.println(raw);
 
   if (raw < FLOOR) {
-    digitalWrite(PIN, HIGH);
+    setVolts(volts);
     Serial.println("Switch on the transistor");
   } else if (raw > CEILING) {
-    digitalWrite(PIN, LOW);
+    setVolts(0.0);
     Serial.println("Switch off the transistor");
   }
   // in between: leave the output as is
