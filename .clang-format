@@ -1,0 +1,33 @@
+# Formatting for the embedded course sources (C++ / Arduino).
+# Discovered by walking up from each file, so this one file covers every
+# lesson, homework and project folder.
+#
+#   clang-format -i $(git ls-files '*.cpp' '*.h' '*.ino')   # format in place
+#   clang-format --dry-run --Werror $(git ls-files '*.cpp' '*.h' '*.ino')
+---
+Language: Cpp
+BasedOnStyle: Google
+
+IndentWidth: 2
+ColumnLimit: 100
+
+# `public:` / `private:` sit flush with the class keyword, members indented by 2.
+AccessModifierOffset: -2
+
+# Keep `#if DEMO_MODE == 4` blocks flush left, even inside a function body.
+IndentPPDirectives: None
+
+# Arduino headers often care about include order (Arduino.h first), so leave
+# the order alone and only let clang-format handle the whitespace.
+SortIncludes: false
+
+# `LedState state() const { return state_; }` stays on one line, but free
+# functions like `loadOff()` keep their body on its own line.
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+
+PointerAlignment: Left
+DerivePointerAlignment: false
+
+SpacesBeforeTrailingComments: 2

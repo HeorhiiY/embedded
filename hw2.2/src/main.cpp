@@ -1,0 +1,61 @@
+#include <Arduino.h>
+
+#include "config.h"
+
+volatile uint32_t edge_counter = 0;  // volatile: modified inside the ISR
+uint32_t last_count = 0; // tracks changes of the counter in the main loop
+uint32_t switch_time = 0; // time of the switching
+uint32_t sense_time = 0; // time of the last sense pin trigger
+
+float mean_sense_time = 0; // mean sense pin trigger time
+
+// ISR: counts falling edges on the sense pin (1 to 0 transition)
+void IRAM_ATTR sense_isr() {
+  edge_counter++;
+}
+
+void setup() {
+  Serial.begin(SERIAL_BAUD);
+  pinMode(CONTROL_PIN, OUTPUT);
+  digitalWrite(CONTROL_PIN, LOW);
+  pinMode(SENSE_PIN, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(SENSE_PIN), sense_isr, FALLING);
+}
+
+uint32_t run_sample() {
+  edge_counter = 0;
+  last_count = 0; 
+  switch_time = micros(); 
+  sense_time = switch_time; 
+
+  digitalWrite(CONTROL_PIN, HIGH); 
+
+  while (micros() - switch_time < DELAY_MICROS) {
+    if (edge_counter != last_count) {
+      last_count = edge_counter;
+      sense_time = micros();
+    }
+  }
+
+  Serial.print("Last edge detected at: ");
+  Serial.print(sense_time - switch_time);
+  Serial.println(" us after switching on the transistor");
+
+  digitalWrite(CONTROL_PIN, LOW); 
+  delay(DELAY_MS);
+  return sense_time - switch_time;
+}
+void loop() {
+  mean_sense_time = 0;
+  for (int i = 0; i < SAMPLE_COUNT; i++) {
+    Serial.print("Sample ");
+    Serial.println(i + 1);
+    uint32_t sample_time = run_sample();
+    mean_sense_time += sample_time;
+    delay(DELAY_MS);
+  }
+  mean_sense_time /= SAMPLE_COUNT;
+  Serial.print("Mean sense time: ");
+  Serial.print(mean_sense_time);
+  Serial.println(" us");
+}
