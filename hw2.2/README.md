@@ -1,19 +1,22 @@
 # Homework 2.2
 
-Measuring the switching delay of a transistor-driven load.
+Measuring the switching delay of a relay.
 
-GPIO 5 (`CONTROL_PIN`) drives the transistor, GPIO 9 (`SENSE_PIN`) reads the
-result back with an internal pull-up. An interrupt on the sense pin counts
-falling edges, so the main loop can timestamp both the *first* edge (when the
-load starts responding) and the *last* one (when it has settled) — the gap
-between them is the bounce.
+GPIO 5 (`CONTROL_PIN`) drives the transistor that energises the relay coil, and
+GPIO 9 (`SENSE_PIN`) reads the relay contact back with an internal pull-up. A
+relay does not close instantly: the armature needs a few milliseconds to pull
+in, and the contact then bounces for a while before it stays closed.
 
-Each sample switches the transistor on, busy-waits for `DELAY_MS` while
-watching the edge counter, and reports both timestamps. Ten samples are
-averaged. Timing uses `micros()`: the FreeRTOS tick behind `millis()` only
-advances in 10 ms steps, which is far too coarse here.
+An interrupt on the sense pin counts falling edges, so the main loop can
+timestamp both the *first* edge (the contact touching for the first time) and
+the *last* one (the contact finally settling). The first gives the pull-in
+time, and the gap between the two gives the bounce duration.
 
 Pins and timings live in [`src/config.h`](src/config.h).
+
+## Setup
+
+![setup](docs/setup.jpg)
 
 ## Output
 
@@ -52,11 +55,11 @@ Mean sense time: 4404.80 us
 Mean first edge time: 3793.40 us
 ```
 
-The load starts responding ~3793 us after the switch and stops moving ~4405 us
-after it, so the turn-on delay is ~3.79 ms and the bounce tail lasts ~611 us on
-top of that.
+The contact first touches ~3793 us after the coil is energised and settles
+~4405 us after it, so the pull-in time is ~3.79 ms and the contact bounces for
+a further ~611 us on top of that.
 
-The first edge is extremely repeatable (3792–3795 us, ±2 us) — that is the
-deterministic turn-on delay of the circuit. The last edge scatters more
-(4389–4415 us) and falls into two clusters ~22 us apart, which is the bounce
-ending on one contact bounce more or one fewer from sample to sample.
+The first edge is extremely repeatable (3792–3795 us, ±2 us) — the mechanical
+pull-in is a deterministic property of the relay. The last edge scatters more
+(4389–4415 us) and falls into two clusters ~22 us apart, which is the contact
+bouncing one extra time or one time fewer from sample to sample.
