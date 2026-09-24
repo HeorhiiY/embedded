@@ -10,3 +10,8 @@
 ![setup](docs/setup.jpg)
 
 ## Demo
+
+
+
+https://github.com/user-attachments/assets/f7d7ee73-f23d-4d62-8865-84978eefe2c4
+
