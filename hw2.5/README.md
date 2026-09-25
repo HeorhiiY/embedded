@@ -1,0 +1,1 @@
+# Swithing on and off the motor with gp timer
