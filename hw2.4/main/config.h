@@ -7,7 +7,7 @@
 
 
 
-#define MODE 4
+#define MODE 5
 
 #define BTN_GPIO GPIO_NUM_7
 

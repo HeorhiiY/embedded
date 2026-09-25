@@ -1,43 +1,22 @@
-Mode 1
+# Handling of the button presses with and without interrupts
 
-Output:
+* Mode 1: interrupt, no debounce
+* Mode 2: interrupt, with debounce
+* Mode 3: interrupt, with debounce, using the flag in the interruot
+* Mode 4: same but non-blocking code 
+* Mode 5: without interrupts
 
-```
-I (5262) 2.4: press count=1
-I (7262) 2.4: press count=2
-I (8262) 2.4: press count=3
-I (10262) 2.4: press count=4
-I (11262) 2.4: press count=5
-I (13262) 2.4: press count=10
-I (15262) 2.4: press count=12
-I (16262) 2.4: press count=13
-I (17262) 2.4: press count=14
-I (19262) 2.4: press count=15
-```
+## Results:
+* Mode 1: bounce every 3-4 presses
+* Mode 2: still the same amount of bounces, because most of them were on release.
+* Mode 3: very rare bounce (once in ~50 presses)
+* Mode 4: same as mode 3
+* Mode 5: same as mode 3.
 
-Mode 2
+## Setup
 
-Output:
+![setup](docs/setup.jpg)
 
-```
-I (1792) 2.4: press count=1
-I (1892) 2.4: press count=2
-I (3772) 2.4: press count=3
-I (5112) 2.4: press count=4
-I (5842) 2.4: press count=5
-I (5942) 2.4: press count=6
-I (6892) 2.4: press count=7
-I (7382) 2.4: press count=8
-I (7832) 2.4: press count=9
-I (8252) 2.4: press count=10
-I (8712) 2.4: press count=11
-I (9122) 2.4: press count=12
-I (9502) 2.4: press count=13
-I (9882) 2.4: press count=14
-I (9952) 2.4: press count=15
-I (9962) 2.4: bounce ignored
-I (10302) 2.4: press count=16
-I (10912) 2.4: press count=17
-```
+## Conclusions: 
 
-Conclusions: most of the bounce was coming from release, not from press, so here this barely helped.
+The button with debounce can be implemented with polling, without the need for interrupts. Makes sense to use interrupts only on "emergency" buttons.

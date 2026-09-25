@@ -134,7 +134,7 @@ void app_main(void) {
   }
 }
 
-#else
+#elif MODE == 4
 
 static volatile bool btn_irq_pending = false; // flag for ISR
 static uint32_t pending_time = 0;
@@ -174,6 +174,61 @@ void app_main(void) {
 
   while (1) {
     now = millis();
+    handle_button(now);
+    request_toggle(now);
+    vTaskDelay(1);
+  }
+}
+
+#elif MODE == 5
+
+static volatile bool btn_poll_pending = false; // flag for ISR
+static uint32_t pending_time = 0;
+static uint32_t press_count = 0;
+static int last_level = 1;
+static void gpio_isr_handler(void* arg) {
+  (void)arg;
+  // do nothing, only here to compile, no interrupt needed in this mode
+}
+
+void poll_button(void) {
+    int level = gpio_get_level(BTN_GPIO);
+    if (last_level == 1 && level == 0) {
+        btn_poll_pending = true;          /* falling edge, like the ISR */
+    }
+    last_level = level;
+}
+
+void handle_button(uint32_t now){
+  if (!btn_poll_pending) {
+    return;
+  }
+
+  pending_time = now;
+  btn_poll_pending = false;
+  return;
+}
+
+void request_toggle(uint32_t now){
+  if (pending_time == 0) {
+    return;
+  }
+  if (now - pending_time >= DEBOUNCE_MS) {
+    if (gpio_get_level(BTN_GPIO) == 0) {
+      press_count++;
+      ESP_LOGI(TAG, "press count=%lu", (unsigned long)press_count);
+    }
+    pending_time = 0;
+  }
+  return;
+}
+void app_main(void) {
+  setup();
+  uint32_t now;
+
+  while (1) {
+    now = millis();
+    poll_button();
     handle_button(now);
     request_toggle(now);
     vTaskDelay(1);
