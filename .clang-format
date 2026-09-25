@@ -1,11 +1,12 @@
-# Formatting for the embedded course sources (C++ / Arduino).
+# Formatting for the embedded course sources (C / C++ / Arduino).
 # Discovered by walking up from each file, so this one file covers every
 # lesson, homework and project folder.
 #
-#   clang-format -i $(git ls-files '*.cpp' '*.h' '*.ino')   # format in place
-#   clang-format --dry-run --Werror $(git ls-files '*.cpp' '*.h' '*.ino')
+#   clang-format -i $(git ls-files '*.c' '*.cpp' '*.h' '*.ino')   # format in place
+#   clang-format --dry-run --Werror $(git ls-files '*.c' '*.cpp' '*.h' '*.ino')
 ---
-Language: Cpp
+# No `Language:` key, so this section is the default for every language.
+# Naming C++ here would make clangd fall back to LLVM style on ESP-IDF .c files.
 BasedOnStyle: Google
 
 IndentWidth: 2
