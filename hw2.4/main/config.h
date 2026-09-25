@@ -7,6 +7,8 @@
 
 
 
-#define MODE 2
+#define MODE 4
 
 #define BTN_GPIO GPIO_NUM_7
+
+#define DEBOUNCE_MS 40
