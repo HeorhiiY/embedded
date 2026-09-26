@@ -23,6 +23,6 @@ The button controls them:
 
 ## Setup
 
-![Setup](doc/setup.jpg)
+![Setup](docs/setup.jpg)
 
 ## Demo
