@@ -20,6 +20,7 @@ The button controls them:
 * the state of the traffic is saved in the FSM variable
 * the state of the button is also saved in its own FSM variable
 * the events registered on the button are changing the state of the traffic FSM
+* the debounce is done via integration (register event on the same 6 readings in a row done with 10ms delay)
 
 ## Setup
 
