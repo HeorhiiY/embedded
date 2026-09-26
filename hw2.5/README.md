@@ -8,3 +8,7 @@ The motor is controlled with peripheral gp timer, which switches the transistor 
 
 ## Demo
 
+
+
+https://github.com/user-attachments/assets/fd8adbe7-8909-4c29-9123-59255ff20588
+
