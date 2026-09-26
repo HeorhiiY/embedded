@@ -49,3 +49,9 @@ void traffic_next(void)
 {
     set_state((lights_state + 1) % STATE_COUNT);
 }
+
+void traffic_reset(void)
+{
+    set_state(RED);
+}
+
