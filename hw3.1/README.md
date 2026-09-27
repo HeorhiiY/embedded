@@ -10,5 +10,9 @@ This project reads analog light sensor values from GPIO7 using the ESP32 ADC and
 
 
 
+https://github.com/user-attachments/assets/0d69ad68-d796-43dd-956b-3e751812b02f
+
+
+
 
 
