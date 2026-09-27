@@ -1,6 +1,6 @@
-# HW3.2: SMA averaging on ADC
+# HW3.2: ADC calibration
 
-This project reads data using ACD from the middle pin of the potenciometer, and then prints the voltage computed with naive linear appriximation and with calibrated voltage reading fucntion of the ESP32 and compares the 2 on the whole range.
+This project reads data using ADC from the middle pin of the potenciometer, and then prints the voltage computed with naive linear appriximation and with calibrated voltage reading fucntion of the ESP32 and compares the 2 on the whole range.
 
 ## Setup
 
