@@ -1,7 +1,6 @@
 #ifndef LED_H
 #define LED_H
 
-void setup_led(void);
-void switch_led(int avg);
+uint8_t pot_to_led_duty(int adc);
 
 #endif

@@ -7,7 +7,7 @@
 #define POT_OFF   200   // ADC counts: knob below this = motor off
 #define HYST      50    // hysteresis band around POT_OFF
 
-uint8_t pot_to_duty(int adc)
+uint8_t pot_to_motor_duty(int adc)
 {
     static bool running = false;
 

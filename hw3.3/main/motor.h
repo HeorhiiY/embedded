@@ -4,6 +4,6 @@
 #include <stdint.h>
 
 // maps a raw ADC reading from the pot to a PWM duty (0 = off)
-uint8_t pot_to_duty(int adc);
+uint8_t pot_to_motor_duty(int adc);
 
 #endif
