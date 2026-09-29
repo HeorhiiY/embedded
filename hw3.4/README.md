@@ -28,3 +28,13 @@ the duty to 0.
 ## Setup
 
 ![setup](docs/setup.jpg)
+
+## Demo
+
+
+
+https://github.com/user-attachments/assets/134f3282-0280-4ded-99b6-50d415da3b7d
+
+
+
+
