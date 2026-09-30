@@ -1,4 +1,4 @@
-# HW3.2: Controlling the servo with potentiometer
+# HW3.5: Controlling the servo with potentiometer
 
 The goal is to have the potentiometer to servo rotation 1:1. The potentiometer has a bit wider range, so only 180 degrees of it would count, others would be cut off.
 
