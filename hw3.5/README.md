@@ -19,5 +19,9 @@ So readings above 3450 would be set to 0 angle, and readings below 680 would be 
 
 
 
+https://github.com/user-attachments/assets/9f31fec3-8c77-43d1-a3bb-3bca91dfb8d4
+
+
+
 
 
