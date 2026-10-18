@@ -7,3 +7,7 @@ This project reads the date and time from a DS1307 RTC over I2C and shows them o
 ![setup](docs/setup.jpg)
 
 ## Demo
+
+
+https://github.com/user-attachments/assets/d878149f-507b-41c3-b026-b3931d8b259e
+
